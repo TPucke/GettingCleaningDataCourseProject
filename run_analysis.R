@@ -38,15 +38,29 @@ build_raw_data <- function(rootfolder) {
     
     combined <- bind_rows(rawtrain, rawtest)
     print("Test and training data combined")
-        
+    
+    # convert activity index to string label
+    f <- paste0(rootfolder, .Platform$file.sep, "activity_labels.txt")
+    activitylabels <- read.csv(f, header = FALSE, sep = "", stringsAsFactors = FALSE)
+    combined$activity <- tolower(sapply(combined$activity, function(x) {activitylabels[x,2]}))
+
+    arrange(combined, subject, activity)
+    
     combined
 }
 
-runall <- function(download=TRUE) {
+report_summary <- function(x) {
+    x %>% group_by(activity, subject) %>% summarize()
+}
+
+runall <- function(download=FALSE) {
     datafolder <<- getdata(download = download)
     print(datafolder)
 
     raw_data <- build_raw_data(datafolder)
+    
+    repsum <- report_summary(raw_data)
     print("done")
+    print(repsum)
 }
 
