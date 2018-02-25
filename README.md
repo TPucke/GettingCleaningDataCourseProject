@@ -1,3 +1,4 @@
+
 # GettingCleaningDataCourseProject.
 
 ## Invoking the program
@@ -16,7 +17,7 @@ The optional parameter can be used to turn off the internet download of the data
 2. Download the zip file from the internet to the temporary file name. 
 3. Unzip the data folders/files into a specified (or default) path.  
 4. Delete the temporary zip file
-5. Return the path of the data files to be used in the rest of the script.  
+The path of the data files to be used in the rest of the script is returned and the global logic stores this path in variable `datafolder`. 
 
 ### build_combined_data
 `build_combined_data(rootfolder)` creates a tidy data.frame that contains both training and test measurements combined, with activity and subject variables added, and with all columns removed that do not represent mean or standard deviation variables.  The function executes the following sequence of steps:
@@ -30,4 +31,11 @@ The optional parameter can be used to turn off the internet download of the data
 5. Read the activity_labels file containing the mapping from numeric to string activity names. 
 6. Convert numeric activity column to the string based activity name
 7. Improve measurement column names by removing punctuation characters and converting to lower case. 
-The resulting tidy dataset is returned. 
+The resulting tidy data table is returned and the global logic stores it in variable `combined_data`. 
+
+### report_summary
+`report_summary(x)` implements step 5 of the project requirements, creating a dataset that contains mean measurement values for all subjects and activities.  The function executes the following sequence of steps:
+1. Applies dplyer functions to:
+  - Group the combined data by activity and subject. 
+  - Summarize all other variables using the calculation of mean. 
+The resulting tidy data table is returned and the global logic stores it in variable `meansbyactivityandsubject`. 
