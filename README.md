@@ -1,16 +1,11 @@
-
 # GettingCleaningDataCourseProject.
 
-## Invoking the program
-It is intended that the entire process is run by calling runall(). 
+## Invoking the process
+It is intended that the entire process is run by sourcing the script file.  The script invokes a sequence of calls to the functions documented below.  
 
-`runall(download=TRUE)`
+An optional parameter of the `getdata` function can be modified to skip the internet download of the data file in the case that it already exists after the script has been previously run. 
 
-The optional parameter can be used to turn off the internet download of the data file in the case that it already exists.  
-
-`runall` manages the sequence of other function calls that implement the details of the project logic. 
-
-## Other functions in order of execution
+## Functions in order of execution
 ### getdata
 `getdata(unzip_path = "./GettingCleaningData/CourseProject", download=TRUE)` ensures that the publicly available data files exist in a known local directory on the system.  In general the default unzip_path will work on all systems.  If the data has been previously downloaded this time consuming step can be skipped by passing the argument `download=FALSE`.  The function executes the following sequence of steps:
 1. Establish a unique temporary file name for download of the zip file.  
