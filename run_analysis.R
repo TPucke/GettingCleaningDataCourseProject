@@ -61,7 +61,7 @@ report_summary <- function(x) {
 }
 
 # main script logic
-datafolder <- getdata(download = FALSE)
+datafolder <- getdata(download = TRUE)
 print(paste("Working with raw data in folder:", datafolder))
 
 combined_data <- build_combined_data(datafolder)
