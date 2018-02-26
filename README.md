@@ -11,7 +11,8 @@ An optional parameter of the `getdata` function can be modified to skip the inte
 1. Establish a unique temporary file name for download of the zip file.  
 2. Download the zip file from the internet to the temporary file name. 
 3. Unzip the data folders/files into a specified (or default) path.  
-4. Delete the temporary zip file
+4. Delete the temporary zip file. 
+
 The path of the data files to be used in the rest of the script is returned and the global logic stores this path in variable `datafolder`. 
 
 ### build_combined_data
@@ -26,6 +27,7 @@ The path of the data files to be used in the rest of the script is returned and 
 5. Read the activity_labels file containing the mapping from numeric to string activity names. 
 6. Convert numeric activity column to the string based activity name
 7. Improve measurement column names by removing punctuation characters and converting to lower case. 
+
 The resulting tidy data frame is returned and the global logic stores it in variable `combined_data`. 
 
 ### report_summary
@@ -33,4 +35,5 @@ The resulting tidy data frame is returned and the global logic stores it in vari
 1. Applies dplyer functions to:
   - Group the combined data by activity and subject. 
   - Summarize all other variables using the calculation of mean. 
+
 The resulting tidy data frame is returned and the global logic stores it in variable `meansbyactivityandsubject`. 
