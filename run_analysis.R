@@ -15,13 +15,13 @@ build_combined_data <- function(rootfolder) {
 
     keepcolumnnames <- "[Mm]ean|[Ss]td"  # a regex used below to isolate mean and std deviation columns only
     
-    features <- read.csv(file=paste0(rootfolder, .Platform$file.sep, "features.txt"), header = FALSE, sep="", colClasses = c("character") )
+    features <- read.csv(file=file.path(rootfolder, "features.txt"), header = FALSE, sep="", colClasses = c("character") )
     
     # load training data
-    f <- paste0(rootfolder, .Platform$file.sep, "train", .Platform$file.sep, "X_train.txt")
+    f <- file.path(rootfolder, "train", "X_train.txt")
     rawtrain <- read.csv(file=f, header = FALSE, sep="", col.names = features[,2])
-    subject <- read.csv(file=paste0(rootfolder,.Platform$file.sep, "train", .Platform$file.sep, paste0("subject_train.txt")), header = FALSE, sep="" )
-    activity <- read.csv(file=paste0(rootfolder,.Platform$file.sep, "train", .Platform$file.sep, paste0("y_train.txt")), header = FALSE, sep="" )
+    subject <- read.csv(file=file.path(rootfolder,"train", "subject_train.txt"), header = FALSE, sep="" )
+    activity <- read.csv(file=file.path(rootfolder, "train", "y_train.txt"), header = FALSE, sep="" )
     keepcolumns <- grep(keepcolumnnames, names(rawtrain), value = T)
     rawtrain <- rawtrain %>% 
         select(keepcolumns) %>% 
@@ -29,10 +29,10 @@ build_combined_data <- function(rootfolder) {
     print("Raw training data read")
 
     # load test data
-    f <- paste0(rootfolder,.Platform$file.sep, "test", .Platform$file.sep, "X_test.txt")
+    f <- file.path(rootfolder, "test", "X_test.txt")
     rawtest <- read.csv(file=f, header = FALSE, sep="", col.names = features[,2])
-    subject <- read.csv(file=paste0(rootfolder,.Platform$file.sep, "test", .Platform$file.sep, "subject_test.txt"), header = FALSE, sep="" )
-    activity <- read.csv(file=paste0(rootfolder,.Platform$file.sep, "test", .Platform$file.sep, "y_test.txt"), header = FALSE, sep="" )
+    subject <- read.csv(file=file.path(rootfolder, "test", "subject_test.txt"), header = FALSE, sep="" )
+    activity <- read.csv(file=file.path(rootfolder, "test", "y_test.txt"), header = FALSE, sep="" )
     keepcolumns <- grep(keepcolumnnames, names(rawtest), value = T)
     rawtest <- rawtest %>% 
         select(keepcolumns) %>% 
@@ -67,5 +67,6 @@ print(paste("Working with raw data in folder:", datafolder))
 combined_data <- build_combined_data(datafolder)
 
 meansbyactivityandsubject <- report_summary(combined_data)
+write.table(meansbyactivityandsubject, file = file.path(datafolder, "meansbyactivityandsubject.txt"), row.name = FALSE)
 print("done")
 
