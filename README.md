@@ -36,4 +36,4 @@ The resulting tidy data frame is returned and the global logic stores it in vari
   - Group the combined data by activity and subject. 
   - Summarize all other variables using the calculation of mean. 
 
-The resulting tidy data frame is returned and the global logic stores it in variable `meansbyactivityandsubject`. 
+The resulting tidy data frame is returned and the global logic stores it in variable `meansbyactivityandsubject`.  The data frame is then stored to disk file in the root data folder printed at the start of script execution. 
